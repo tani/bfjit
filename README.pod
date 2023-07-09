@@ -10,9 +10,9 @@ bfjit is approximately 25 times faster than the non-JIT interpreter!
 
 =over
 
-=item * Interpreter: C<bf mandebrot.bf> took 2m4.215s
+=item * Interpreter: C<bf mandelbrot.bf> took 2m4.215s
 
-=item * JIT-enabled Interpreter: C<bf --jit mandebrot.bf> took 0m5.755s
+=item * JIT-enabled Interpreter: C<bf --jit mandelbrot.bf> took 0m5.755s
 
 =back
 
