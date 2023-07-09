@@ -2,7 +2,7 @@
 
 =head1 bfjit
 
-bfjit is a Brainfuck interpreter with a JIT compiler.
+bfjit is a L<esoteric programming language|https://en.wikipedia.org/wiki/Brainfuck> interpreter with a JIT compiler.
 
 =head2 Benchmark
 
