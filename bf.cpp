@@ -2,12 +2,12 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <cstdio>
 #include <libtcc.h>
 
 void bfc(const std::string& bf_code) {
   std::stringstream os;
-  os << "#include <stdio.h>\n"
-     << "int bf (){\n"
+  os << "int bf (){\n"
      << "char a[30000] = {0};\n"
      << "char *p = a;\n";
   for(auto c : bf_code) {
@@ -27,6 +27,7 @@ void bfc(const std::string& bf_code) {
   auto c_code = os.str();
   auto *s = tcc_new();
   tcc_set_output_type(s, TCC_OUTPUT_MEMORY);
+  tcc_add_symbol(s, "putchar", (void*)putchar);
   tcc_compile_string(s, c_code.c_str());
   tcc_relocate(s, TCC_RELOCATE_AUTO);
   auto bf = (int (*)())tcc_get_symbol(s, "bf");
