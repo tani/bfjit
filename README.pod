@@ -19,7 +19,7 @@ bfjit is approximately 25 times faster than the non-JIT interpreter!
 =head2 Usage
 
 First, you need to install tcc (C<libtcc-dev> for Debian/Ubuntu users).
-Then, simply type $ make in the console.
+Then, simply type C<$ make> in the console.
 The C<bf> command enables JIT compilation if C<--jit> is provided.
 
 =head2 License
