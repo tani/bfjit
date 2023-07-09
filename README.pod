@@ -1,0 +1,29 @@
+=pod
+
+=head1 bfjit
+
+bfjit is a Brainfuck interpreter with a JIT compiler.
+
+=head2 Benchmark
+
+bfjit is approximately 25 times faster than the non-JIT interpreter!
+
+=over
+
+=item * Interpreter: C<bf mandebrot.bf> took 2m4.215s
+
+=item * JIT-enabled Interpreter: C<bf --jit mandebrot.bf> took 0m5.755s
+
+=back
+
+=head2 Usage
+
+First, you need to install tcc (C<libtcc-dev> for Debian/Ubuntu users).
+Then, simply type $ make in the console.
+The C<bf> command enables JIT compilation if C<--jit> is provided.
+
+=head2 License
+
+This software is licensed under the MIT License.
+
+=cut
