@@ -74,18 +74,23 @@ void bfi(const std::string& bf_code) {
 }
 
 int main(int argc, char *argv[]) {
-  // first argument is 'bfi' or 'bfc'
-  auto cmd = argv[1];
-  // second argument is filename
-  auto filename = argv[2];
-  // read file from filename
-  std::ifstream ifs(filename);
-  std::string bf_code((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-  if (cmd == std::string("bfi"))
+  if (argc == 2) {
+    auto filename = argv[1];
+    std::ifstream ifs(filename);
+    std::string bf_code((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
     bfi(bf_code);
-  else if (cmd == std::string("bfc"))
+  } else if (argc == 3 && argv[1] == std::string("--jit")) {
+    auto filename = argv[2];
+    std::ifstream ifs(filename);
+    std::string bf_code((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
     bfc(bf_code);
-  else
-    std::cerr << "unknown command: " << cmd << std::endl;
+  } else {
+    std::cerr << "usage: bf [--jit] <filename>" << std::endl;
+    std::cerr << "your input: " << "bf ";
+    for(int i = 1; i < argc; ++i) {
+      std::cerr << argv[i] << " ";
+    }
+    return 1;
+  }
   return 0;
 }
