@@ -16,29 +16,48 @@
           buildInputs = with pkgs; [
             gcc
             libgccjit
-            # tinycc
+            zig
           ];
         };
 
-        packages.default = pkgs.stdenv.mkDerivation {
-          name = "my-cpp-app";
-          src = ./.; # ソースコードのディレクトリ
+        packages."bf++" = pkgs.stdenv.mkDerivation {
+          name = "bf++";
+          src = ./.;
           buildInputs = with pkgs; [
             gcc
             libgccjit
-            # tinycc
           ];
           buildPhase = ''
-            g++ -o my-app main.cpp -lgccjit
+            g++ -o bf++ -std=c++23 cpp/bf_gccjit.cpp -lgccjit
           '';
           installPhase = ''
             mkdir -p $out/bin
-            cp my-app $out/bin/
+            cp bf++ $out/bin/
           '';
         };
 
-        apps.default = flake-utils.lib.mkApp {
-          drv = self.packages.${system}.default;
+        packages.bf = pkgs.stdenv.mkDerivation {
+          name = "bf";
+          src = ./.;
+          buildInputs = with pkgs; [
+            gcc
+            libgccjit
+          ];
+          buildPhase = ''
+            gcc -o bf -std=c23 c/bf_gccjit_c99.c -lgccjit
+          '';
+          installPhase = ''
+            mkdir -p $out/bin
+            cp bf $out/bin/
+          '';
+        };
+
+        apps."bf++" = flake-utils.lib.mkApp {
+          drv = self.packages.${system}."bf++";
+        };
+
+        apps.bf = flake-utils.lib.mkApp {
+          drv = self.packages.${system}.bf;
         };
       }
     );
